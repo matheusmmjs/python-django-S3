@@ -5,15 +5,23 @@ services:
     image: postgres
     container_name: db  
     environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+     - POSTGRES_ENGINE=django.db.backends.postgresql     
+     - POSTGRES_DB=postgres
+     - POSTGRES_USER=postgres
+     - POSTGRES_PASSWORD=postgres
+     - POSTGRES_HOST=db
+     - POSTGRES_PORT=5432     
       
   web:    
     build: 
       context: .
     image: python:3.9.1
     container_name: web   
+    ##environment:      
+     # - USE_S3=TRUE
+     # - AWS_ACCESS_KEY_ID=AKIAVFI2JIWNKUUORS5W
+     # - AWS_SECRET_ACCESS_KEY=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
+     # - AWS_STORAGE_BUCKET_NAME=challenge-static
     command: python manage.py runserver 0.0.0.0:8000      
     volumes:
       - .:/usr/src/app
